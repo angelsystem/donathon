@@ -150,7 +150,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
-  aws-sdk
+  aws-sdk (~> 2)
   byebug
   coffee-rails (~> 4.1.0)
   jbuilder (~> 2.0)

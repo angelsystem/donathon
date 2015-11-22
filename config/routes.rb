@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :donations
   resources :users
   resources :campaigns, only: [:index]
   # The priority is based upon order of creation: first created -> highest priority.
