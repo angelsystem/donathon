@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+
+  has_many :donations
+
   def self.authenticate_user_from_facebook(fb_access_token)
     graph = Koala::Facebook::API.new(fb_access_token)
     profile = graph.get_object('me')
@@ -48,5 +51,6 @@ class User < ActiveRecord::Base
     new_user.save(validate: false)
     new_user
   end
+
 
 end

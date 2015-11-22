@@ -4,9 +4,10 @@ Rails.application.routes.draw do
     get   '/login', :to => 'sessions#new', :as => :login
     match '/auth/:provider/callback', :to => 'sessions#create', via: [:get, :post]
     match '/auth/failure', :to => 'sessions#failure', via: [:get, :post]
-    resources :donations
     resources :users
-    resources :campaigns, only: [:index]
+    resources :campaigns, only: [:index] do
+      resources :donations
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
