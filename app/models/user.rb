@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
   has_many :donations
+  has_many :deliverys
 
   def self.authenticate_user_from_facebook(fb_access_token)
     graph = Koala::Facebook::API.new(fb_access_token)

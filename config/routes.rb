@@ -1,12 +1,17 @@
 Rails.application.routes.draw do
 
+
   namespace :api, defaults: { format: :json } do
     get   '/login', :to => 'sessions#new', :as => :login
     match '/auth/:provider/callback', :to => 'sessions#create', via: [:get, :post]
     match '/auth/failure', :to => 'sessions#failure', via: [:get, :post]
     resources :users
     resources :campaigns, only: [:index] do
-      resources :donations
+      resources :donations, only: [:index, :create]
+    end
+
+    resources :donations, only: [] do
+      resources :deliveries, only: [:create]
     end
   end
 
