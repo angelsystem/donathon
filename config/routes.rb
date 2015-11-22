@@ -1,15 +1,11 @@
 Rails.application.routes.draw do
-<<<<<<< HEAD
-  resources :donations
-  resources :users
-  resources :campaigns, only: [:index]
-=======
+
   namespace :api, defaults: { format: :json } do
+    resources :donations
     resources :users
     resources :campaigns, only: [:index]
   end
 
->>>>>>> a3d42e1a45ccb58faa9fa4cd93486fea0a733d7e
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
