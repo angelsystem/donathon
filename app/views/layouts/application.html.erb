@@ -7,8 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+<div id="main-container" class="container">
+  <div class="row">
+    <div class="col-lg-3">
+      <h3>Tealeaf Academy Todo</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <%= yield %>
+    </div>
+  </div>
+  </div>
+</div>
 </body>
 </html>

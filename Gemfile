@@ -25,9 +25,15 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'active_model_serializers'
 
+gem 'bcrypt', '~> 3.1.7'
+
+gem 'simple_form'
+
 gem "mini_magick"
 
 gem 'aws-sdk', '~> 2'
+
+gem 'bootstrap-sass', '~> 3.2.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

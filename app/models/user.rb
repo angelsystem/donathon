@@ -1,6 +1,13 @@
 class User < ActiveRecord::Base
+  enum status: [ :active, :inactive ]
+
+  has_secure_password(validations: false)
 
   has_many :donations
+
+  def fullname
+    "#{first_name} #{last_name}"
+  end
 
   def self.authenticate_user_from_facebook(fb_access_token)
     graph = Koala::Facebook::API.new(fb_access_token)
@@ -52,5 +59,25 @@ class User < ActiveRecord::Base
     new_user
   end
 
+  def self.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
+
+  def self.find_authenticatable(email, password)
+    if user = User.find_by(email: email)
+      return user if user.authenticatable?(password)
+    end
+  end
+
+  def authenticated?(attribute, token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
+  end
+
+  def authenticatable?(password)
+    authenticate(password)
+  end
 
 end

@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  root 'campaigns#index'
+  get  '/login', :to => 'sessions#new', :as => :login
+  post 'login' => 'sessions#create'
+  resources :campaigns, only: [:index] do
+    resources :donations, only: [:index]
+  end
 
   namespace :api, defaults: { format: :json } do
     get   '/login', :to => 'sessions#new', :as => :login
