@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20151122054756) do
+=======
+ActiveRecord::Schema.define(version: 20151122052956) do
+>>>>>>> 2689882a4eecab0b103b6753b56e2ec4978c607e
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +28,19 @@ ActiveRecord::Schema.define(version: 20151122054756) do
     t.integer  "status"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "deliveries", force: :cascade do |t|
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "address"
+    t.string   "district"
+    t.integer  "user_id"
+    t.integer  "donation_id"
+    t.integer  "transport_method_id"
+    t.integer  "status",              default: 0
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "donations", force: :cascade do |t|
@@ -39,6 +56,14 @@ ActiveRecord::Schema.define(version: 20151122054756) do
 
   add_index "donations", ["campaign_id"], name: "index_donations_on_campaign_id", using: :btree
   add_index "donations", ["user_id"], name: "index_donations_on_user_id", using: :btree
+
+  create_table "transport_methods", force: :cascade do |t|
+    t.string   "name"
+    t.text     "instruction"
+    t.integer  "status",      default: 0
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email"

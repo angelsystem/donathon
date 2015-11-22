@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_secure_password(validations: false)
 
   has_many :donations
+  has_many :deliverys
 
   def fullname
     "#{first_name} #{last_name}"

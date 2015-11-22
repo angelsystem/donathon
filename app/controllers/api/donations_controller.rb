@@ -19,20 +19,13 @@ module Api
         s3_obj.write(picture, :acl => :public_read)
         picture_url = s3_obj.public_url.to_s
 
-        campaign = Campaign.params[:campaign_id]
+        campaign = Campaign.find(params[:campaign_id])
         donation = campaign.donations.new(donation_params)
         donation.user = current_user
         if donation.save
-          render :json => donation.to_json
+          render :json => donation.to_json, :status => 200
         else
-          error_str = ""
 
-          donation.errors.each{|attr, msg|
-            error_str += "#{attr} - #{msg},"
-          }
-
-          e = Error.new(:status => 400, :message => error_str)
-          render :json => e.to_json, :status => 400
         end
 
       else
