@@ -7,6 +7,7 @@ module Api
     end
 
     def create
+      byebug
       rand_id = rand_string(40)
       picture_name = params[:picture].original_filename
       picture = params[:picture].read
